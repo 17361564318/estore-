@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.dao.BookDao">
+	<!-- List<Book> findAllBooks(); -->
+	<select id="findAllBooks" resultMap="BookWithCategory">
+		select 
+			b.id bid,
+			b.name bname,
+			price,
+			image,
+			c.id cid,
+			c.name cname
+		from book b,category c
+		where b.category_id = c.id
+	</select>
+	
+	<resultMap type="Book" id="BookWithCategory" autoMapping="true">
+		<id property="id" column="bid"/>
+		<result property="name" column="bname"/>
+		<result property="category.id" column="cid"/>
+		<result property="category.name" column="cname"/>
+	</resultMap>
+		
+	<!-- Book findBookById(Integer id); -->
+	<select id="findBookById" parameterType="int" resultMap="BookWithCategory">
+		select 
+			b.id bid,
+			b.name bname,
+			price,
+			image,
+			c.id cid,
+			c.name cname
+		from book b,category c
+		where b.category_id = c.id
+		and b.id = #{id}
+	</select>
+</mapper>

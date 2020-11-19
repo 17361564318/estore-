@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.dao.ShopCarDao">
+	<select id="findByCustomer"
+		parameterType="customer" resultMap="shopcar">
+		select
+		customer_id,username,password,zip,address,phone,email,
+		book_id,name,price,image,
+		num
+		from shopcar, book, customer
+		where
+		shopcar.book_id = book.id
+		and
+		shopcar.customer_id = customer.id
+		and
+		customer_id = #{id}
+	</select>
+	
+	<resultMap type="shopcar" id="shopcar">
+		<result column="customer_id" property="customer.id" />
+		<result column="username" property="customer.username" />
+		<result column="password" property="customer.password" />
+		<result column="zip" property="customer.zip" />
+		<result column="address" property="customer.address" />
+		<result column="phone" property="customer.phone" />
+		<result column="email" property="customer.email" />
+		<result column="book_id" property="book.id" />
+		<result column="name" property="book.name" />
+		<result column="price" property="book.price" />
+		<result column="image" property="book.image" />
+	</resultMap>
+	<insert id="saveShopCar" parameterType="com.briup.bean.ShopCar">
+		insert into
+		shopcar(customer_id,book_id,num)
+		values(#{customer.id},#{book.id},${num})
+
+	</insert>
+	<update id="updateShopCar"
+		parameterType="com.briup.bean.ShopCar">
+		update shopcar
+		set num=#{num} where
+		book_id=#{book.id}
+		and
+		customer_id=#{customer.id}
+	</update>
+	<!-- void clearShopCarByCustomer(Customer customer); -->
+	<delete id="clearShopCarByCustomer" parameterType="Customer">
+		delete 
+		from shopcar
+		where customer_id = #{id}
+	</delete>
+</mapper>

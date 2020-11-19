@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.dao.AddressDao">
+	<select id="findByCustomer"
+		parameterType="_int" resultMap="address">
+		select
+		addr_name,addr_detail,addr_phone,customer_id
+		from address
+		where
+		customer_id = #{id}
+	</select>
+	<resultMap type="com.briup.bean.Address" id="address">
+		<result column="addr_name" property="addrName" />
+		<result column="addr_detail" property="addrDetail" />
+		<result column="addr_phone" property="addrPhone" />
+		<result column="customer_id" property="customerId" />
+	</resultMap>
+	<insert id="saveAddress" parameterType="com.briup.bean.Address">
+		insert into
+		address(addr_name,addr_detail,addr_phone,customer_id)
+		values(#{addrName},#{addrDetail},#{addrPhone},#{customerId})
+	</insert>
+</mapper>

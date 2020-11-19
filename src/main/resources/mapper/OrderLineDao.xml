@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.dao.OrderLineDao">
+	<insert id="saveOrderLine" parameterType="OrderLine">
+		insert into
+		orderline(num,book_id,order_id)
+		values(#{num},#{book.id},#{order.id})
+	</insert>
+</mapper>
