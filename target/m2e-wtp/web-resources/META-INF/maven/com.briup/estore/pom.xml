@@ -38,6 +38,16 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
 		</dependency>
+		
+		
+		<!-- https://mvnrepository.com/artifact/com.alipay.sdk/alipay-sdk-java -->
+		<!-- 添加支付宝支付需要用到的包 -->
+			<dependency>
+			    <groupId>com.alipay.sdk</groupId>
+			    <artifactId>alipay-sdk-java</artifactId>
+			    <version>3.7.110.ALL</version>
+			</dependency>
+		
 	</dependencies>
 
 

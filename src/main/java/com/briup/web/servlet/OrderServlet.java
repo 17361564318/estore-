@@ -38,7 +38,8 @@ public class OrderServlet extends HttpServlet {
 		
 		//生成订单、订单项，清空购物车
 		IOrderService service = new OrderServiceImpl();
-		service.saveOrder(new Order(total, new Timestamp(System.currentTimeMillis()), customer), shopcar);
+		Order order = new Order(total,new Timestamp(System.currentTimeMillis()),customer);
+		service.saveOrder(order, shopcar);
 
 		//更新购物车中的信息
 		IShopCarService scservice = new ShopCarServiceImpl();
@@ -47,7 +48,7 @@ public class OrderServlet extends HttpServlet {
 		//更新session中的订单
 		List<Order> orders = service.findByCustomer(customer);
 		session.setAttribute("orders", orders);
-		
+		session.setAttribute("order", order);
 		session.setAttribute("total", total);
 		response.sendRedirect(request.getContextPath() + "/confirmSuc.jsp");
 	}

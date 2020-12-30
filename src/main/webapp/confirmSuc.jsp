@@ -42,7 +42,7 @@
 					收货人：${customer.username}
 					收获地址：${customer.address};<br>
 					
-				<a href="index.jsp">继续购物</a>
+				<a href="pay">去付款</a>
 			</span>
 		
 		
